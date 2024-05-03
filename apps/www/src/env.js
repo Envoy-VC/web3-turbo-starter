@@ -5,9 +5,11 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(['development', 'test', 'production']),
   },
-  client: {},
+  client: {
+    NEXT_PUBLIC_WALLETCONNECT_ID: z.string().min(1),
+  },
   experimental__runtimeEnv: {
-    NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_WALLETCONNECT_ID: process.env.NEXT_PUBLIC_WALLETCONNECT_ID,
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
   emptyStringAsUndefined: true,
