@@ -1,5 +1,10 @@
-import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
-import { cookieStorage, createConfig, createStorage, http } from 'wagmi';
+import {
+  type Config,
+  cookieStorage,
+  createConfig,
+  createStorage,
+  http,
+} from 'wagmi';
 import { anvil, mainnet, sepolia } from 'wagmi/chains';
 import { walletConnect } from 'wagmi/connectors';
 import { env } from '~/env';
@@ -13,7 +18,7 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886'],
 };
 
-export const wagmiConfig = createConfig({
+export const wagmiConfig: Config = createConfig({
   chains: [mainnet, sepolia, anvil],
   ssr: true,
   storage: createStorage({
@@ -26,9 +31,3 @@ export const wagmiConfig = createConfig({
     [anvil.id]: http(),
   },
 });
-
-declare module 'wagmi' {
-  interface Register {
-    config: typeof wagmiConfig;
-  }
-}

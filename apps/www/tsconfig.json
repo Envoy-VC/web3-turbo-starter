@@ -1,4 +1,6 @@
 {
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/tsconfig.json",
+  "extends": "../../packages/typescript-config/nextjs.json",
   "compilerOptions": {
     /* Base Options: */
     "esModuleInterop": true,
@@ -8,6 +10,7 @@
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
 
     /* Strictness */
     "strict": true,
@@ -36,7 +39,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/providers/SmoothScroll.tsx"
   ],
   "exclude": ["node_modules"]
 }

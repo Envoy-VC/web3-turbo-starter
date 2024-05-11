@@ -6,6 +6,7 @@ const config = {
   },
   plugins: ['@typescript-eslint'],
   extends: [
+    '../../packages/eslint-config/next.js',
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:@typescript-eslint/stylistic-type-checked',
