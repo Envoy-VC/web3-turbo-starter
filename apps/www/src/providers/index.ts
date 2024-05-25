@@ -1,3 +1,3 @@
-import Web3Provider from './Web3Provider';
+import { Web3Provider } from './web3-provider';
 
 export { Web3Provider };

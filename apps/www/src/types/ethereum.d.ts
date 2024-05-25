@@ -1,4 +1,4 @@
-import { wagmiConfig } from '~/lib/viem';
+import type { wagmiConfig } from '~/lib/viem';
 
 declare module 'wagmi' {
   interface Register {

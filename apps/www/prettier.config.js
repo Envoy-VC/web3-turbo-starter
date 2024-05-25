@@ -1,6 +1,11 @@
+// @ts-expect-error no types
+import vercelPrettierOptions from '@vercel/style-guide/prettier';
+
 /** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions} */
 const config = {
+  ...vercelPrettierOptions,
   plugins: [
+    ...vercelPrettierOptions.plugins,
     '@trivago/prettier-plugin-sort-imports',
     'prettier-plugin-tailwindcss',
   ],

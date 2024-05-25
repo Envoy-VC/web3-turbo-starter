@@ -1,16 +1,9 @@
 {
-  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/tsconfig.json",
-  "extends": "../../packages/typescript-config/nextjs.json",
+  "extends": "@vercel/style-guide/typescript/node20",
   "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2022",
     "allowJs": true,
     "resolveJsonModule": true,
-    "moduleDetection": "force",
     "isolatedModules": true,
-    "verbatimModuleSyntax": true,
 
     /* Strictness */
     "strict": true,
@@ -33,14 +26,14 @@
     }
   },
   "include": [
+    "svgr.d.ts",
     ".eslintrc.cjs",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts",
-    "src/providers/SmoothScroll.tsx"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

@@ -9,7 +9,7 @@ import { createWeb3Modal } from '@web3modal/wagmi/react';
 import { type State, WagmiProvider } from 'wagmi';
 
 createWeb3Modal({
-  wagmiConfig: wagmiConfig,
+  wagmiConfig,
   projectId,
   enableAnalytics: true,
   enableOnramp: true,
@@ -18,16 +18,14 @@ createWeb3Modal({
 
 const queryClient = new QueryClient();
 
-interface Props extends PropsWithChildren {
+interface Web3ProviderProps extends PropsWithChildren {
   initialState?: State;
 }
 
-const Web3Provider = ({ children, initialState }: Props) => {
+export const Web3Provider = ({ children, initialState }: Web3ProviderProps) => {
   return (
     <WagmiProvider config={wagmiConfig} initialState={initialState}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   );
 };
-
-export default Web3Provider;

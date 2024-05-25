@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { useWeb3Modal, useWeb3ModalState } from '@web3modal/wagmi/react';
-import BigNumber from 'bignumber.js';
+import { BigNumber } from 'bignumber.js';
 import {
   useAccount,
   useBalance,
-  useChainId,
   useChains,
   useEnsAvatar,
   useEnsName,
@@ -17,7 +16,9 @@ import { Button } from '~/components/ui/button';
 
 import { Skeleton } from '../ui/skeleton';
 
-const ConnectButton = () => {
+/* eslint-disable @next/next/no-img-element -- ENS Avatar can have any remote pattern */
+
+export const ConnectButton = () => {
   const { address } = useAccount();
   const chains = useChains();
 
@@ -37,36 +38,30 @@ const ConnectButton = () => {
     name: ensName ?? '',
     query: {
       enabled: ensName !== null,
-      initialData: `https://api.dicebear.com/8.x/shapes/svg?seed=${address}`,
+      initialData: `https://api.dicebear.com/8.x/shapes/svg?seed=${address ?? ''}`,
     },
   });
 
-  const chainIds = useMemo(() => chains.map((c) => c.id), [chains]);
-  const activeChainId = useMemo(
-    () => parseInt(selectedNetworkId ?? '1'),
-    [selectedNetworkId]
-  );
-  const currencySymbol = useMemo(
-    () =>
-      chains.find((c) => c.id === activeChainId)?.nativeCurrency.symbol ?? '',
-    [chains, activeChainId]
-  );
+  const chainIds = chains.map((c) => c.id);
+  const activeChainId = parseInt(selectedNetworkId ?? '1');
+  const currencySymbol =
+    chains.find((c) => c.id === activeChainId)?.nativeCurrency.symbol ?? '';
 
-  const formattedBalance = useMemo(() => {
+  const formattedBalance = (() => {
     if (balanceStatus === 'success') {
-      return BigNumber(Number(balance?.value ?? 0))
-        .dividedBy(10 ** (balance?.decimals ?? 18))
+      return BigNumber(Number(balance.value))
+        .dividedBy(10 ** balance.decimals)
         .toFixed(4);
     }
     return '';
-  }, [balance, balanceStatus]);
+  })();
 
-  const formattedAddress = useMemo(() => {
+  const formattedAddress = (() => {
     if (address) {
       return `${address.slice(0, 4)}...${address.slice(-3)}`;
     }
     return '';
-  }, [address]);
+  })();
 
   if (!address) {
     return (
@@ -81,7 +76,7 @@ const ConnectButton = () => {
         {isOpen ? 'Connecting...' : 'Connect'}
       </Button>
     );
-  } else if (address && !chainIds.includes(activeChainId)) {
+  } else if (!chainIds.includes(activeChainId)) {
     return (
       <Button
         className='rounded-full'
@@ -94,7 +89,7 @@ const ConnectButton = () => {
         Switch Network
       </Button>
     );
-  } else if (address && chainIds.includes(activeChainId)) {
+  } else if (chainIds.includes(activeChainId)) {
     return (
       <Button
         className='h-12 rounded-xl'
@@ -110,12 +105,12 @@ const ConnectButton = () => {
             <Skeleton className='h-9 w-9 rounded-full' />
           ) : (
             <img
+              alt=''
+              className='h-9 w-9 rounded-full'
               src={
                 ensAvatar ??
                 `https://api.dicebear.com/8.x/shapes/svg?seed=${address}`
               }
-              alt=''
-              className='h-9 w-9 rounded-full'
             />
           )}
           <div className='flex flex-col items-start'>
@@ -141,5 +136,3 @@ const ConnectButton = () => {
     );
   }
 };
-
-export default ConnectButton;
