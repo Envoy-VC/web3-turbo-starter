@@ -1,21 +1,7 @@
 {
-  "extends": "@vercel/style-guide/typescript/node20",
+  "extends": "config/typescript/nextjs.json",
   "compilerOptions": {
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-
-    /* Strictness */
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "checkJs": true,
-
     /* Bundled projects */
-    "lib": ["dom", "dom.iterable", "ES2022"],
-    "noEmit": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "jsx": "preserve",
     "plugins": [{ "name": "next" }],
     "incremental": true,
 

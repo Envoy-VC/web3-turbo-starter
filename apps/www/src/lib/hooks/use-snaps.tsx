@@ -11,18 +11,7 @@ import type {
 } from '~/types/snap';
 
 export const useSnaps = () => {
-  const { connector } = useAccount();
-
-  const isMetamask = () => {
-    if (!connector?.id.startsWith('io.metamask') && window.ethereum) {
-      throw new Error(
-        'Snaps are only available on Metamask. Please connect to Metamask to use this feature.'
-      );
-    }
-  };
-
   const getSnaps = async () => {
-    isMetamask();
     const snaps = (await window.ethereum.request({
       method: 'wallet_getSnaps',
       params: [],
@@ -32,7 +21,6 @@ export const useSnaps = () => {
   };
 
   const requestSnaps = async (params: RequestSnapsParams) => {
-    isMetamask();
     const snaps = (await window.ethereum.request({
       method: 'wallet_requestSnaps',
       params,
@@ -42,7 +30,6 @@ export const useSnaps = () => {
   };
 
   const invokeSnap = async (params: InvokeSnapParams) => {
-    isMetamask();
     const result = (await window.ethereum.request({
       method: 'wallet_invokeSnap',
       params,
