@@ -1,26 +1,18 @@
 const { resolve } = require('node:path');
 
-// @ts-expect-error no types
-const { JAVASCRIPT_FILES } = require('@vercel/style-guide/eslint/constants');
-
 const project = resolve(__dirname, 'tsconfig.json');
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  extends: [
-    require.resolve('@vercel/style-guide/eslint/browser'),
-    require.resolve('@vercel/style-guide/eslint/node'),
-    require.resolve('@vercel/style-guide/eslint/react'),
-    require.resolve('@vercel/style-guide/eslint/next'),
-    require.resolve('@vercel/style-guide/eslint/typescript'),
-  ],
+  extends: [require.resolve('config/eslint/next.js')],
   parserOptions: { project },
   settings: {
     'import/resolver': { typescript: { project } },
   },
   rules: {
+    'no-console': ['off'],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-confusing-void-expression': [
       'error',
@@ -58,7 +50,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: JAVASCRIPT_FILES,
+      files: ['*.js?(x)', '*.mjs'],
       extends: ['plugin:@typescript-eslint/disable-type-checked'],
     },
     {
