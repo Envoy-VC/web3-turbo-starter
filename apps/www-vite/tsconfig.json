@@ -8,7 +8,10 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+
+    /* Types */
+    "types": ["unplugin-fonts/client"]
   },
   "include": [
     ".eslintrc.cjs",
