@@ -148,6 +148,9 @@ importers:
 
   apps/www-vite:
     dependencies:
+      '@t3-oss/env-core':
+        specifier: ^0.10.1
+        version: 0.10.1(typescript@5.4.5)(zod@3.23.8)
       '@tanstack/react-router':
         specifier: ^1.40.0
         version: 1.40.0(react-dom@18.3.1)(react@18.3.1)
@@ -175,6 +178,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.3)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@tanstack/router-devtools':
         specifier: ^1.40.0
